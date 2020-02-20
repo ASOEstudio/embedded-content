@@ -7,10 +7,18 @@ function bindEvent(element, eventName, eventHandler) {
     }
 }
 
+// detectando a origem do evento
+function receiveMessage(event) {
+    console.log(event.origin, event.data, event.source, window.opener);
+    if (event.origin !== 'http://127.0.0.1:5500')
+        return;
+}
+
 // Send a message to the parent
 var sendMessage = function (msg) {
     // Make sure you are sending a string, and to stringify JSON
-    window.parent.postMessage(msg, '*');
+    // window.parent.postMessage(msg, '*');
+    window.parent.postMessage(msg, () => receiveMessage());
 };
 
 var results = document.getElementById('results'),
@@ -23,6 +31,7 @@ bindEvent(window, 'message', function (e) {
 
 // Send random message data on every button click
 bindEvent(messageButton, 'click', function (e) {
+    console.log(e);
     var random = Math.random();
     sendMessage('' + random);
 });

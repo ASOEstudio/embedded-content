@@ -7,22 +7,26 @@ function bindEvent(element, eventName, eventHandler) {
     }
 }
 
+var bodySize = {
+    height: document.body.clientHeight,
+    width: document.body.clientWidth
+}
+
 // var iframeSource = 'https://gist.github.com/pbojinov/8965299/raw/fadf2c4058b6481646e7244994c1890f2ad81b60/iframe.html';
 var iframeSource = './iframe.html';
 
 // Create the iframe
 var iframe = document.createElement('iframe');
-iframe.setAttribute('src', iframeSource);
-iframe.setAttribute('id', 'the_iframe');
-iframe.style.width = 450 + 'px';
-iframe.style.height = 200 + 'px';
-document.body.appendChild(iframe);
+    iframe.setAttribute('src', iframeSource);
+    iframe.setAttribute('id', 'the_iframe');
+    iframe.style.width = bodySize.width + 'px';
+    iframe.style.height = bodySize.height + 'px';
+    document.body.appendChild(iframe);
 
 // Send a message to the child iframe
 var iframeEl = document.getElementById('the_iframe'),
     messageButton = document.getElementById('message_button'),
     results = document.getElementById('results');
-
 
 // Send a message to the child iframe
 var sendMessage = function (msg) {

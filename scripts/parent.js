@@ -1,8 +1,8 @@
 // dimensões do body
 var bodySize = {
     height: document.body.clientHeight,
-    width: document.body.clientWidth
-}
+    width: document.body.clientWidth },
+    hash = 's2h038f234fh9jei';
 
 // eventListener para o redimensionameto da tela
 window.addEventListener('resize', () => {
@@ -19,7 +19,6 @@ function bindEvent(element, eventName, eventHandler) {
     }
 }
 
-// var iframeSource = 'https://gist.github.com/pbojinov/8965299/raw/fadf2c4058b6481646e7244994c1890f2ad81b60/iframe.html';
 var iframeSource = './iframe.html';
 
 // Create the iframe
@@ -52,7 +51,7 @@ function receiveMessage(event) {
 bindEvent(messageButton, 'click', function (e) {
     var random = Math.random(),
         verifyKey = {
-            teste: 'asd',
+            hash: hash,
             msg: random
         };
     sendMessage(JSON.stringify(verifyKey));

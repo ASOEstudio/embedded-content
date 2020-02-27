@@ -1,3 +1,5 @@
+var hash = 's2h038f234fh9jei';
+
 // addEventListener support for IE8
 function bindEvent(element, eventName, eventHandler) {
     if (element.addEventListener) {
@@ -29,7 +31,7 @@ bindEvent(window, 'message', function (e) {
         console.log('mensagem veio do Parent');
         var data = JSON.parse(e.data);
         console.log(data);
-        if (data.teste == 'asd') results.innerHTML = data.msg;
+        if (data.hash === hash) results.innerHTML = data.msg;
     }
 });
 

@@ -38,16 +38,31 @@ var iframeEl = document.getElementById('the_iframe'),
 // Send a message to the child iframe
 var sendMessage = function (msg) {
     // Make sure you are sending a string, and to stringify JSON
-    iframeEl.contentWindow.postMessage(msg, '*');
+    // iframeEl.contentWindow.postMessage(msg, '*');
+    iframeEl.contentWindow.postMessage(msg, receiveMessage);
 };
 
-// Send random messge data on every button click
+// detectando a origem do evento
+function receiveMessage(event) {
+    console.log('origem do evento', event.origin);
+    if (event.origin === 'http://127.0.0.1:5500') return true;
+}
+
+// Send random message data on every button click
 bindEvent(messageButton, 'click', function (e) {
-    var random = Math.random();
-    sendMessage('' + random);
+    var random = Math.random(),
+        verifyKey = {
+            teste: 'asd',
+            msg: random
+        };
+    sendMessage(JSON.stringify(verifyKey));
 });
 
 // Listen to message from child window
 bindEvent(window, 'message', function (e) {
-    results.innerHTML = e.data;
+    if (receiveMessage(e)) {
+        console.log('mensagem veio do Iframe');
+        console.log(e.data);
+        results.innerHTML = e.data;
+    }
 });

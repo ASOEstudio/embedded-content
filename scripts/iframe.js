@@ -9,9 +9,8 @@ function bindEvent(element, eventName, eventHandler) {
 
 // detectando a origem do evento
 function receiveMessage(event) {
-    console.log(event);
-    if (event.origin !== 'http://127.0.0.1:5500')
-        return;
+    console.log('origem do evento', event.origin);
+    if (event.origin === 'http://127.0.0.1:5500') return true;
 }
 
 // Send a message to the parent
@@ -26,7 +25,12 @@ var results = document.getElementById('results'),
 
 // Listen to messages from parent window
 bindEvent(window, 'message', function (e) {
-    results.innerHTML = e.data;
+    if (receiveMessage(e)) {
+        console.log('mensagem veio do Parent');
+        var data = JSON.parse(e.data);
+        console.log(data);
+        if (data.teste == 'asd') results.innerHTML = data.msg;
+    }
 });
 
 // Send random message data on every button click

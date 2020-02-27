@@ -1,3 +1,15 @@
+// dimensões do body
+var bodySize = {
+    height: document.body.clientHeight,
+    width: document.body.clientWidth
+}
+
+// eventListener para o redimensionameto da tela
+window.addEventListener('resize', () => {
+    bodySize.width = document.body.clientWidth;
+    iframeEl.style.width = bodySize.width - 1 + 'px';
+});
+
 // addEventListener support for IE8
 function bindEvent(element, eventName, eventHandler) {
     if (element.addEventListener) {
@@ -7,11 +19,6 @@ function bindEvent(element, eventName, eventHandler) {
     }
 }
 
-var bodySize = {
-    height: document.body.clientHeight,
-    width: document.body.clientWidth
-}
-
 // var iframeSource = 'https://gist.github.com/pbojinov/8965299/raw/fadf2c4058b6481646e7244994c1890f2ad81b60/iframe.html';
 var iframeSource = './iframe.html';
 
@@ -19,7 +26,7 @@ var iframeSource = './iframe.html';
 var iframe = document.createElement('iframe');
     iframe.setAttribute('src', iframeSource);
     iframe.setAttribute('id', 'the_iframe');
-    iframe.style.width = bodySize.width + 'px';
+    iframe.style.width = bodySize.width - 1 + 'px';
     iframe.style.height = bodySize.height + 'px';
     document.body.appendChild(iframe);
 

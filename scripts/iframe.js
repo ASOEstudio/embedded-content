@@ -9,7 +9,7 @@ function bindEvent(element, eventName, eventHandler) {
 
 // detectando a origem do evento
 function receiveMessage(event) {
-    // console.log(event);
+    console.log(event);
     if (event.origin !== 'http://127.0.0.1:5500')
         return;
 }
